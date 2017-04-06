@@ -46,6 +46,38 @@ public:
         assert(w >= 0 && w < n);
         return g[v][w];
     }
+
+    class adj_iterator{
+    private:
+        dense_graph &G;
+        int v;
+        int index;
+    public:
+        adj_iterator(dense_graph& graph, int v)
+        :G(graph){
+            this->v = v;
+            this->index = -1;
+        }
+
+        int begin(){
+            index = -1;
+            return next();
+        }
+
+        int next(){
+            for(index += 1; index < G.v(); ++index)
+                if(G.g[v][index])
+                    return index;
+                return -1;
+        }
+
+        bool end(){
+            return index >= G.v();
+        }
+
+    };
+
+
 };
 
 #endif //DENSE_GRAPH_H

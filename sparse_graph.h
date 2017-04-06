@@ -19,14 +19,15 @@ public:
         this->n = n;
         this->m = m;
         this->directed = directed;
-        for(int i = 0; i < n; ++i){
+        
+        for(int i = 0; i < n; ++i)
             g.push_back(vector<int>());
-        }
+    }
 
-        ~sparse_graph(){}
+    ~sparse_graph(){}
 
-        int v(){return n;}
-        int e(){return m;}
+        int v(){ return n; }
+        int e(){ return m; }
 
         void add_edge(int v, int w){
             assert(v >= 0 && v < n);
@@ -47,7 +48,7 @@ public:
                     return true;
             return false;
         }
-    }
+    
 
     class adj_iterator{
     private:
@@ -59,6 +60,25 @@ public:
         :G(graph){
             this->v = v;
             this->index = 0;
+        }
+
+        int next(){
+            ++index;
+            if(index < G.g[v].size())
+                return G.g[v][index];
+            return -1;
+
+        }
+
+        int begin(){
+            index = 0;
+            if(G.g[v].size())
+                return G.g[v][index];
+            return -1;
+        }
+
+        bool end(){
+            return index >= G.g[v][index];
         }
     };
 
