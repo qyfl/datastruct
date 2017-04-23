@@ -58,7 +58,7 @@ class vector
     {
         
         --end;
-        if(end == finish/2)
+        if(end == finish/4)     //避免复杂度震荡
             resize(finish/2);
     }
 
